@@ -1,7 +1,7 @@
-cpp_data_processor
-==================
+Data Processor in C++
+=====================
 
 Basic implementation of a data processor using interfaces
 ---------------------------------------------------------
 
-Work in progress
+A Qt Creator project provided. Work in progress.
