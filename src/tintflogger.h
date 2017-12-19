@@ -5,6 +5,8 @@
 
 struct TIntfLogger
 {
+    virtual ~TIntfLogger() {}
+
     virtual void log( const std::string& msg, const std::string& anId ) = 0;
     virtual void enable( const bool enable )                            = 0;
 };

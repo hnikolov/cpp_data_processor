@@ -26,6 +26,11 @@ void simple_use( TIntfDataProcessor & myDataProcessor, double aDouble, int anInt
     std::cout << std::endl;
 }
 
+TDataProcessor_2* create_2( )
+{
+    TData_1* myData = new TData_1( "Dt5", myLogger );
+    return new TDataProcessor_2( "DP5", myData, new TProcessor_1( "Pr5", *myData, myLogger ), myLogger );
+}
 
 int main()
 {
@@ -44,10 +49,16 @@ int main()
     // NOTE: Too specific for clients. What if we want to use alternative TData and TProcessor implementations?
     // --------------------------------------------------------------------------------------------------------
     TDPImplementation_1 myDataProcessor_3( "DP3", myLogger );
+    // --------------------------------------------------------------------------------------------------------
 
-    simple_use( myDataProcessor_1,  2.1 ,  4, true );
-    simple_use( myDataProcessor_2, -7.67,  3, true );
-    simple_use( myDataProcessor_3, 12.12, 12, true );
+    TDataProcessor_2* myDataProcessor_4 = create_2();
+
+    simple_use(  myDataProcessor_1,   2.1 ,  4, true );
+    simple_use(  myDataProcessor_2,  -7.67,  3, true );
+    simple_use(  myDataProcessor_3,  12.12, 12, true );
+    simple_use( *myDataProcessor_4,   1.23,  5, true );
+
+    delete myDataProcessor_4;
 
     // --------------------------------------------------------------------------------------------------------
     // QUESTION: What if we want to use alternative implementations, e.g., TData_2 and TProcessor_2, which

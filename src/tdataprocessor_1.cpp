@@ -42,3 +42,46 @@ void TDataProcessor_1::enable_log( const bool enable )
     m_logger.enable( enable );
 }
 // ----------------------------
+
+TDataProcessor_2::TDataProcessor_2(std::string anId, TIntfData *aData, TIntfProcessor *aProcessor, TIntfLogger &aLogger) :
+    m_id       ( anId       ),
+    m_logger   ( aLogger    )
+{
+    m_data      = aData;
+    m_processor = aProcessor;
+}
+
+TDataProcessor_2::~TDataProcessor_2()
+{
+    delete m_processor;
+    delete m_data;
+    m_logger.log( "Called destuctor", m_id );
+}
+
+// ----------------------------
+// Interface TIntfDataProcessor
+// ----------------------------
+void TDataProcessor_2::set_1( const double aValue )
+{
+    m_data->set_1( aValue );
+}
+
+void TDataProcessor_2::set_4( const int aValue )
+{
+    m_data->set_4( aValue );
+}
+
+double TDataProcessor_2::get_5()
+{
+    return m_data->get_5();
+}
+
+void TDataProcessor_2::calculate_1()
+{
+    m_processor->calculate_1();
+}
+
+void TDataProcessor_2::enable_log( const bool enable )
+{
+    m_logger.enable( enable );
+}

@@ -3,6 +3,8 @@
 
 struct TIntfData
 {
+    virtual ~TIntfData() {}
+
     virtual void   set_1( const double aValue ) = 0; // Configure
     virtual double get_1()                      = 0;
     virtual void   set_2( const int    aValue ) = 0;

@@ -6,6 +6,8 @@
 // ----------------------
 struct TIntfDataProcessor
 {
+    virtual ~TIntfDataProcessor() {}
+
     virtual void   set_1( const double aValue )    = 0;
     virtual void   set_4( const int    aValue )    = 0;
     virtual double get_5()                         = 0;
