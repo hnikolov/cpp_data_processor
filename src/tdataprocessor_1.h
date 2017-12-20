@@ -38,6 +38,8 @@ private:
 // Implements the interface exposed to clients
 // Contains pointers to other interfaces
 // -----------------------------------------------
+#include <memory>
+
 class TDataProcessor_2 : public TIntfDataProcessor
 {
 public:
@@ -56,8 +58,33 @@ public:
 
 private:
     std::string      m_id;
-    TIntfData      * m_data;
-    TIntfProcessor * m_processor;
+    std::unique_ptr<TIntfData>      m_data;
+    std::unique_ptr<TIntfProcessor> m_processor;
+//    TIntfData      * m_data;
+//    TIntfProcessor * m_processor;
+    TIntfLogger    & m_logger;
+};
+
+class TDataProcessor_3 : public TIntfDataProcessor
+{
+public:
+    TDataProcessor_3( std::string      anId
+                    , std::unique_ptr<TIntfData> aData
+                    , std::unique_ptr<TIntfProcessor> aProcessor
+                    , TIntfLogger    & aLogger );
+    virtual ~TDataProcessor_3();
+
+    // Interface TIntfDataProcessor
+    virtual void   set_1( const double aValue );
+    virtual void   set_4( const int    aValue );
+    virtual double get_5();
+    virtual void   calculate_1();
+    virtual void   enable_log( const bool enable );
+
+private:
+    std::string      m_id;
+    std::unique_ptr<TIntfData>      m_data;
+    std::unique_ptr<TIntfProcessor> m_processor;
     TIntfLogger    & m_logger;
 };
 

@@ -5,6 +5,7 @@
 #include "tdpimplementation_1.h"
 
 #include <iostream>
+#include <vector>
 
 
 TLogger_1 myLogger;
@@ -26,11 +27,34 @@ void simple_use( TIntfDataProcessor & myDataProcessor, double aDouble, int anInt
     std::cout << std::endl;
 }
 
+
 TDataProcessor_2* create_2( )
 {
     TData_1* myData = new TData_1( "Dt5", myLogger );
     return new TDataProcessor_2( "DP5", myData, new TProcessor_1( "Pr5", *myData, myLogger ), myLogger );
 }
+
+std::unique_ptr<TIntfDataProcessor> create_3( )
+{
+    std::unique_ptr<TData_1>        myData (new TData_1( "Dt6", myLogger ) );
+    std::unique_ptr<TProcessor_1>   myProc (new TProcessor_1( "Pr6", *myData, myLogger ));
+    std::unique_ptr<TDataProcessor_3> myDataProc (new TDataProcessor_3( "DP6", move(myData), move(myProc), myLogger ));
+    return myDataProc;
+}
+
+
+// ------------------------------------------------------------------------------
+TData_1          myData( "Dt4", myLogger );
+TProcessor_1     myProcessor( "Pr4", myData, myLogger );
+
+TIntfDataProcessor* create_1( )
+{
+    return new TDataProcessor_1( "DP4", myData, myProcessor, myLogger );
+}
+// ------------------------------------------------------------------------------
+
+//std::vector< TIntfDataProcessor* > myDPV;
+std::vector< std::unique_ptr<TIntfDataProcessor> > myDPV;
 
 int main()
 {
@@ -51,14 +75,31 @@ int main()
     TDPImplementation_1 myDataProcessor_3( "DP3", myLogger );
     // --------------------------------------------------------------------------------------------------------
 
-    TDataProcessor_2* myDataProcessor_4 = create_2();
+    TIntfDataProcessor* myDataProcessor_4 = create_1();
+    TIntfDataProcessor* myDataProcessor_5 = create_2();
+//    std::unique_ptr<TIntfDataProcessor> myDataProcessor_4 (create_1());
+//    std::unique_ptr<TIntfDataProcessor> myDataProcessor_5 (create_2());
+
+    std::unique_ptr<TIntfDataProcessor> myDataProcessor_6 (create_3());
+    myDPV.push_back( move(myDataProcessor_6) );
+
+    myDPV.push_back( create_3() );
+
+//    myDPV.push_back( myDataProcessor_4 );
+//    myDPV.push_back( myDataProcessor_5 );
 
     simple_use(  myDataProcessor_1,   2.1 ,  4, true );
     simple_use(  myDataProcessor_2,  -7.67,  3, true );
     simple_use(  myDataProcessor_3,  12.12, 12, true );
     simple_use( *myDataProcessor_4,   1.23,  5, true );
+    simple_use( *myDataProcessor_5,   7.92,  3, true );
+//    simple_use( *myDPV[0],   1.23,  5, true );
+//    simple_use( *myDPV[1],   7.92,  3, true );
+    simple_use( *myDPV[0],   -0.92,  3, true );
+    simple_use( *myDPV[1],   -7.92,  3, true );
 
     delete myDataProcessor_4;
+    delete myDataProcessor_5;
 
     // --------------------------------------------------------------------------------------------------------
     // QUESTION: What if we want to use alternative implementations, e.g., TData_2 and TProcessor_2, which
