@@ -27,33 +27,30 @@ void simple_use( TIntfDataProcessor & myDataProcessor, double aDouble, int anInt
     std::cout << std::endl;
 }
 
-
-TDataProcessor_2* create_2( )
+// Factory approach: use pointers
+TDataProcessor_2* create_2( std::string anId )
 {
-    TData_1* myData = new TData_1( "Dt5", myLogger );
-    return new TDataProcessor_2( "DP5", myData, new TProcessor_1( "Pr5", *myData, myLogger ), myLogger );
+    std::string sdata = anId + "_data";
+    std::string sproc = anId + "_proc";
+
+    TData_1* myData = new TData_1( sdata, myLogger );
+    return new TDataProcessor_2( anId, myData, new TProcessor_1( sproc, *myData, myLogger ), myLogger );
 }
 
-std::unique_ptr<TIntfDataProcessor> create_3( )
+// Factory approach: use smart pointers
+std::unique_ptr<TIntfDataProcessor> create_3( std::string anId )
 {
-    std::unique_ptr<TData_1>        myData (new TData_1( "Dt6", myLogger ) );
-    std::unique_ptr<TProcessor_1>   myProc (new TProcessor_1( "Pr6", *myData, myLogger ));
-    std::unique_ptr<TDataProcessor_3> myDataProc (new TDataProcessor_3( "DP6", move(myData), move(myProc), myLogger ));
+    std::string sdata = anId + "_data";
+    std::string sproc = anId + "_proc";
+
+    std::unique_ptr<TData_1>          myData (new TData_1( sdata, myLogger ) );
+    std::unique_ptr<TProcessor_1>     myProc (new TProcessor_1( sproc, *myData, myLogger ));
+    std::unique_ptr<TDataProcessor_3> myDataProc (new TDataProcessor_3( anId, move(myData), move(myProc), myLogger ));
     return myDataProc;
 }
 
 
-// ------------------------------------------------------------------------------
-TData_1          myData( "Dt4", myLogger );
-TProcessor_1     myProcessor( "Pr4", myData, myLogger );
-
-TIntfDataProcessor* create_1( )
-{
-    return new TDataProcessor_1( "DP4", myData, myProcessor, myLogger );
-}
-// ------------------------------------------------------------------------------
-
-//std::vector< TIntfDataProcessor* > myDPV;
+std::vector< TIntfDataProcessor* > myPDPV;
 std::vector< std::unique_ptr<TIntfDataProcessor> > myDPV;
 
 int main()
@@ -69,54 +66,56 @@ int main()
     TProcessor_1     processor_2( "Pr2", data_2, myLogger );
     TDataProcessor_1 myDataProcessor_2( "DP2", data_2, processor_2, myLogger );
 
-    // --------------------------------------------------------------------------------------------------------
-    // NOTE: Too specific for clients. What if we want to use alternative TData and TProcessor implementations?
-    // --------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------
+    // Specific implementation. New/delete of TData_1 and TProcessor_1 done internally
+    // -------------------------------------------------------------------------------------
     TDPImplementation_1 myDataProcessor_3( "DP3", myLogger );
-    // --------------------------------------------------------------------------------------------------------
 
-    TIntfDataProcessor* myDataProcessor_4 = create_1();
-    TIntfDataProcessor* myDataProcessor_5 = create_2();
-//    std::unique_ptr<TIntfDataProcessor> myDataProcessor_4 (create_1());
-//    std::unique_ptr<TIntfDataProcessor> myDataProcessor_5 (create_2());
+    // ----------------------------------------
+    // Using pointers, delete at the end needed
+    // ----------------------------------------
+    TData_1             myData( "Dt4", myLogger );
+    TProcessor_1        myProcessor( "Pr4", myData, myLogger );
 
-    std::unique_ptr<TIntfDataProcessor> myDataProcessor_6 (create_3());
-    myDPV.push_back( move(myDataProcessor_6) );
+    TIntfDataProcessor* myDataProcessor_4 = new TDataProcessor_1( "DP4", myData, myProcessor, myLogger );
+    TIntfDataProcessor* myDataProcessor_5 = create_2( "DP5" );
+    TIntfDataProcessor* myDataProcessor_8 = new TDPImplementation_1( "DP8", myLogger );
 
-    myDPV.push_back( create_3() );
+    // DO NOT: myDPV.push_back( create_2( "DP" )); called destructor of pointer, not object -> Memory leak
+    myPDPV.push_back(  myDataProcessor_4 ); // TDataProcessor_1
+    myPDPV.push_back(  myDataProcessor_5 ); // TDataProcessor_2
+    myPDPV.push_back( &myDataProcessor_2 ); // TDataProcessor_1
+    myPDPV.push_back(  myDataProcessor_8 ); // TDPImplementation_1
 
-//    myDPV.push_back( myDataProcessor_4 );
-//    myDPV.push_back( myDataProcessor_5 );
+    // ----------------------------------------
+    // Using smart pointers, delete not needed
+    // ----------------------------------------
+    std::unique_ptr<TIntfDataProcessor> myDataProcessor_6 = create_3( "DP6" );
+    std::unique_ptr<TIntfDataProcessor> myDataProcessor_9 (new TDPImplementation_1( "DP9", myLogger ));
 
+    myDPV.push_back( move(myDataProcessor_6) ); // TDataProcessor_3
+    myDPV.push_back( move(myDataProcessor_9) ); // TDPImplementation_1
+    myDPV.push_back( create_3( "DP7" )       ); // OK, Destructor of object called at the end
+
+    // ------------------------------------------------
+    // Do some data processing
+    // ------------------------------------------------
     simple_use(  myDataProcessor_1,   2.1 ,  4, true );
-    simple_use(  myDataProcessor_2,  -7.67,  3, true );
+    simple_use( *myPDPV[2],          -7.67,  3, true ); // myDataProcessor_2
     simple_use(  myDataProcessor_3,  12.12, 12, true );
-    simple_use( *myDataProcessor_4,   1.23,  5, true );
+    simple_use( *myPDPV[0],           1.23,  5, true ); // myDataProcessor_4
+    simple_use( *myPDPV[3],           0.23,  8, true ); // TDPImplementation_1
     simple_use( *myDataProcessor_5,   7.92,  3, true );
-//    simple_use( *myDPV[0],   1.23,  5, true );
-//    simple_use( *myDPV[1],   7.92,  3, true );
-    simple_use( *myDPV[0],   -0.92,  3, true );
-    simple_use( *myDPV[1],   -7.92,  3, true );
+    simple_use( *myDPV[0],           -0.92,  3, true );
+    simple_use( *myDPV[1],           -7.92,  3, true ); // TDPImplementation_1
+    simple_use( *myDPV[2],            9.26, -2, true );
 
+    // ----------------------
+    // Do not forget to clean
+    // ----------------------
     delete myDataProcessor_4;
     delete myDataProcessor_5;
-
-    // --------------------------------------------------------------------------------------------------------
-    // QUESTION: What if we want to use alternative implementations, e.g., TData_2 and TProcessor_2, which
-    //           implement the same interfaces?
-    // --------------------------------------------------------------------------------------------------------
-    //
-    // 1) Use the same TDataProcessor_1 class. But want to avoid the knowledge about TData and TProcessor
-    // --------------------------------------------------------------------------------------------------------
-    // TData_2          alt_data_2( "Dt2", myLogger );
-    // TProcessor_2     alt_processor_2( "Pr2", alt_data_2, myLogger );
-    // TDataProcessor_1 myDataProcessor_2( "DP2", alt_data_2, alt_processor_2, myLogger );
-    //
-    // 2) Need to create another class, e.g, TDPImplementation_2
-    // --------------------------------------------------------------------------------------------------------
-    // TDPImplementation_2 myDataProcessor_3( "DP3", myLogger );
-    //
-    // 3) Object factory in combination with TDataProcessor_1?
+    delete myDataProcessor_8;
 
     return 0;
 }

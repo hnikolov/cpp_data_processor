@@ -58,20 +58,22 @@ public:
 
 private:
     std::string      m_id;
-    std::unique_ptr<TIntfData>      m_data;
-    std::unique_ptr<TIntfProcessor> m_processor;
-//    TIntfData      * m_data;
-//    TIntfProcessor * m_processor;
+    TIntfData      * m_data;
+    TIntfProcessor * m_processor;
     TIntfLogger    & m_logger;
 };
 
+// -----------------------------------------------
+// Implements the interface exposed to clients
+// Contains smart pointers to other interfaces
+// -----------------------------------------------
 class TDataProcessor_3 : public TIntfDataProcessor
 {
 public:
-    TDataProcessor_3( std::string      anId
-                    , std::unique_ptr<TIntfData> aData
+    TDataProcessor_3( std::string                     anId
+                    , std::unique_ptr<TIntfData>      aData
                     , std::unique_ptr<TIntfProcessor> aProcessor
-                    , TIntfLogger    & aLogger );
+                    , TIntfLogger                   & aLogger );
     virtual ~TDataProcessor_3();
 
     // Interface TIntfDataProcessor
@@ -82,10 +84,10 @@ public:
     virtual void   enable_log( const bool enable );
 
 private:
-    std::string      m_id;
+    std::string                     m_id;
     std::unique_ptr<TIntfData>      m_data;
     std::unique_ptr<TIntfProcessor> m_processor;
-    TIntfLogger    & m_logger;
+    TIntfLogger                   & m_logger;
 };
 
 #endif // TDATAPROCESSOR_1_H
