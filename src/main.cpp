@@ -1,4 +1,5 @@
 #include "tdata_1.h"
+#include "tdata_map.h"
 #include "tprocessor_1.h"
 #include "tlogger_1.h"
 #include "tdataprocessor_1.h"
@@ -28,27 +29,38 @@ void simple_use( TIntfDataProcessor & myDataProcessor, double aDouble, int anInt
 }
 
 // Factory approach: use pointers
-TDataProcessor_2* create_2( std::string anId )
+TDataProcessor_2* create_2( std::string anId, TIntfLogger &aLogger )
 {
     std::string sdata = anId + "_data";
     std::string sproc = anId + "_proc";
 
-    TData_1* myData = new TData_1( sdata, myLogger );
-    return new TDataProcessor_2( anId, myData, new TProcessor_1( sproc, *myData, myLogger ), myLogger );
+    TData_1* myData = new TData_1( sdata, aLogger );
+    return new TDataProcessor_2( anId, myData, new TProcessor_1( sproc, *myData, aLogger ), aLogger );
 }
 
 // Factory approach: use smart pointers
-std::unique_ptr<TIntfDataProcessor> create_3( std::string anId )
+std::unique_ptr<TIntfDataProcessor> create_3( std::string anId, TIntfLogger &aLogger )
 {
     std::string sdata = anId + "_data";
     std::string sproc = anId + "_proc";
 
-    std::unique_ptr<TData_1>          myData (new TData_1( sdata, myLogger ) );
-    std::unique_ptr<TProcessor_1>     myProc (new TProcessor_1( sproc, *myData, myLogger ));
-    std::unique_ptr<TDataProcessor_3> myDataProc (new TDataProcessor_3( anId, move(myData), move(myProc), myLogger ));
+    std::unique_ptr<TData_1>          myData (new TData_1( sdata, aLogger ) );
+    std::unique_ptr<TProcessor_1>     myProc (new TProcessor_1( sproc, *myData, aLogger ));
+    std::unique_ptr<TDataProcessor_3> myDataProc (new TDataProcessor_3( anId, move(myData), move(myProc), aLogger ));
     return myDataProc;
 }
 
+// Using TData_map
+std::unique_ptr<TIntfDataProcessor> create_4( std::string anId, TIntfLogger &aLogger )
+{
+    std::string sdata = anId + "_data";
+    std::string sproc = anId + "_proc";
+
+    std::unique_ptr<TData_map>        myData (new TData_map( sdata, aLogger ) );
+    std::unique_ptr<TProcessor_1>     myProc (new TProcessor_1( sproc, *myData, aLogger ));
+    std::unique_ptr<TDataProcessor_3> myDataProc (new TDataProcessor_3( anId, move(myData), move(myProc), aLogger ));
+    return myDataProc;
+}
 
 std::vector< TIntfDataProcessor* > myPDPV;
 std::vector< std::unique_ptr<TIntfDataProcessor> > myDPV;
@@ -78,7 +90,7 @@ int main()
     TProcessor_1        myProcessor( "Pr4", myData, myLogger );
 
     TIntfDataProcessor* myDataProcessor_4 = new TDataProcessor_1( "DP4", myData, myProcessor, myLogger );
-    TIntfDataProcessor* myDataProcessor_5 = create_2( "DP5" );
+    TIntfDataProcessor* myDataProcessor_5 = create_2( "DP5", myLogger );
     TIntfDataProcessor* myDataProcessor_8 = new TDPImplementation_1( "DP8", myLogger );
 
     // DO NOT: myDPV.push_back( create_2( "DP" )); called destructor of pointer, not object -> Memory leak
@@ -90,12 +102,13 @@ int main()
     // ----------------------------------------
     // Using smart pointers, delete not needed
     // ----------------------------------------
-    std::unique_ptr<TIntfDataProcessor> myDataProcessor_6 = create_3( "DP6" );
+    std::unique_ptr<TIntfDataProcessor> myDataProcessor_6 = create_3( "DP6", myLogger );
     std::unique_ptr<TIntfDataProcessor> myDataProcessor_9 (new TDPImplementation_1( "DP9", myLogger ));
 
-    myDPV.push_back( move(myDataProcessor_6) ); // TDataProcessor_3
-    myDPV.push_back( move(myDataProcessor_9) ); // TDPImplementation_1
-    myDPV.push_back( create_3( "DP7" )       ); // OK, Destructor of object called at the end
+    myDPV.push_back( move(myDataProcessor_6)      ); // TDataProcessor_3
+    myDPV.push_back( move(myDataProcessor_9)      ); // TDPImplementation_1
+    myDPV.push_back( create_3( "DP7", myLogger )  ); // OK, Destructor of object called at the end
+    myDPV.push_back( create_4( "DP10", myLogger ) ); // TDataMap_1
 
     // ------------------------------------------------
     // Do some data processing
@@ -109,6 +122,7 @@ int main()
     simple_use( *myDPV[0],           -0.92,  3, true );
     simple_use( *myDPV[1],           -7.92,  3, true ); // TDPImplementation_1
     simple_use( *myDPV[2],            9.26, -2, true );
+    simple_use( *myDPV[3],           10.10, -2, true );
 
     // ----------------------
     // Do not forget to clean

@@ -3,7 +3,7 @@
 
 #include "tintfdata.h"
 #include "tintflogger.h"
-#include <iostream>
+
 
 struct TConfig_1
 {
