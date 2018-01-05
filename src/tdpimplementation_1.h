@@ -16,11 +16,12 @@ public:
     virtual ~TDPImplementation_1();
 
     // Interface TIntfDataProcessor
-    virtual void   set_1( const double aValue );
-    virtual void   set_4( const int    aValue );
-    virtual double get_5();
-    virtual void   calculate_1();
-    virtual void   enable_log( const bool enable );
+    virtual void        set_1( const double aValue );
+    virtual void        set_4( const int    aValue );
+    virtual double      get_5();
+    virtual void        calculate_1();
+    virtual void        enable_log( const bool enable );
+    virtual std::string getId();
 
 private:
     TDPImplementation_1            ( const TDPImplementation_1& ); // No copy constructor

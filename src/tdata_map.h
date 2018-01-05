@@ -6,8 +6,8 @@
 
 //--------------------------------------
 #include <map>
-// TODO: Do we need to separate types?
-/*
+// TODO: Can we use double to store both double and int types instead?
+//*
 template <class T>
 class TMAP
 {
@@ -19,7 +19,7 @@ public:
 private:
     std::map<std::string, T> m_map;
 };
-*/
+/*/
 class TMAP
 {
 public:
@@ -30,6 +30,7 @@ public:
 private:
     std::map<std::string, double> m_map;
 };
+//*/
 
 // --------------------------------------
 class TData_map : public TIntfData
@@ -54,17 +55,23 @@ public:
     virtual void   set_6( const int    aValue );
     virtual int    get_6()                     ;
 
-    std::map<std::string, double> m_map;
 
 private:
     TData_map            ( const TData_map& ); // No copy constructor
     TData_map& operator= ( const TData_map& ); // No assign operator
 
+    void   _add( std::string anItem, const double aValue );
+    void   _set( std::string anItem, const double aValue );
+    double _get( std::string anItem );
+
+    // Use double to store both doubles and integers
+    std::map<std::string, double> m_map;
+
     // TODO: Need to be public???
-//    TMAP< double >  m_map_double;
-//    TMAP< int    >  m_map_int;
-    TMAP  m_map_double;
-    TMAP  m_map_int;
+    TMAP< double >  m_map_double;
+    TMAP< int    >  m_map_int;
+//    TMAP  m_map_double;
+//    TMAP  m_map_int;
 
 
     std::string   m_id;

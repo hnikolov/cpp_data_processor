@@ -21,27 +21,9 @@ TDPImplementation_1::~TDPImplementation_1()
 // ----------------------------
 // Interface TIntfDataProcessor
 // ----------------------------
-void TDPImplementation_1::set_1( const double aValue )
-{
-    m_data->set_1( aValue );
-}
-
-void TDPImplementation_1::set_4( const int aValue )
-{
-    m_data->set_4( aValue );
-}
-
-double TDPImplementation_1::get_5()
-{
-    return m_data->get_5();
-}
-
-void TDPImplementation_1::calculate_1()
-{
-    m_processor->calculate_1();
-}
-
-void TDPImplementation_1::enable_log( const bool enable )
-{
-    m_logger.enable( enable );
-}
+void        TDPImplementation_1::set_1( const double aValue )    { m_data->set_1( aValue );    }
+void        TDPImplementation_1::set_4( const int aValue )       { m_data->set_4( aValue );    }
+double      TDPImplementation_1::get_5()                         { return m_data->get_5();     }
+void        TDPImplementation_1::calculate_1()                   { m_processor->calculate_1(); }
+void        TDPImplementation_1::enable_log( const bool enable ) { m_logger.enable( enable );  }
+std::string TDPImplementation_1::getId()                         { return m_id;                }

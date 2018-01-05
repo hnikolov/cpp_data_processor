@@ -11,6 +11,22 @@
 
 TLogger_1 myLogger;
 
+void assert_double( double aD1, double aD2, std::string aMsg = "" )
+{
+    std::string s1 = std::to_string( aD1 );
+    std::string s2 = std::to_string( aD2 );
+
+    // Check results. TODO: how we compare doubles, use fcmp()
+    if( s1 != s2 )
+    {
+        std::cout << "[Error] " << aMsg << " : " << s1 << " Expected : " << s2 << std::endl;
+    }
+    else
+    {
+        std::cout << "[OK] " << aMsg << std::endl;
+    }
+}
+
 void simple_use( TIntfDataProcessor & myDataProcessor, double aDouble, int anInt, bool aLogEn = true )
 {
     myDataProcessor.enable_log( aLogEn );
@@ -25,7 +41,10 @@ void simple_use( TIntfDataProcessor & myDataProcessor, double aDouble, int anInt
     myDataProcessor.calculate_1();
 
     myLogger.log("Result            : " + std::to_string( myDataProcessor.get_5() ), "Main");
-    std::cout << std::endl;
+
+    assert_double( myDataProcessor.get_5(), (aDouble + anInt), myDataProcessor.getId());
+
+    if( aLogEn == true ) { std::cout << std::endl; }
 }
 
 // Factory approach: use pointers
@@ -50,7 +69,7 @@ std::unique_ptr<TIntfDataProcessor> create_3( std::string anId, TIntfLogger &aLo
     return myDataProc;
 }
 
-// Using TData_map
+// Using smart pointers and TData_map
 std::unique_ptr<TIntfDataProcessor> create_4( std::string anId, TIntfLogger &aLogger )
 {
     std::string sdata = anId + "_data";
