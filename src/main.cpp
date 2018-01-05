@@ -150,5 +150,9 @@ int main()
     delete myDataProcessor_5;
     delete myDataProcessor_8;
 
+    // TESTS
+    Test_TData_1 myTestData1( "Test_TData_1", myLogger );
+    myTestData1.run();
+
     return 0;
 }
