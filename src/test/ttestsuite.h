@@ -103,8 +103,6 @@ class TTestSuite_myTests : public TTestSuite
 {
 public:
     TTestSuite_myTests( std::string anId, TIntfLogger &aLogger );
-
-    void run_all();
 };
 
 #endif // TTESTSUITE_H
