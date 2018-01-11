@@ -32,6 +32,7 @@ public:
 
     // NOTE: For testing only
     friend class Test_TData_1;
+    friend class Test_TData_1_1;
 
     void defaultInit();
 
