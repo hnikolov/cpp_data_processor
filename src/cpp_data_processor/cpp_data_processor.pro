@@ -16,7 +16,8 @@ SOURCES += \
     ../tdpimplementation_1.cpp \
     ../tlogger_1.cpp \
     ../tprocessor_1.cpp \
-    ../tdata_map.cpp
+    ../tdata_map.cpp \
+    ../test/ttestsuite.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -39,4 +40,5 @@ HEADERS += \
     ../tintfprocessor.h \
     ../tlogger_1.h \
     ../tprocessor_1.h \
-    ../tdata_map.h
+    ../tdata_map.h \
+    ../test/ttestsuite.h

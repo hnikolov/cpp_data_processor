@@ -63,7 +63,7 @@ private:
 class Test_TData_1
 {
 public:
-    explicit Test_TData_1( std::string anId, TIntfLogger &aLogger );
+    Test_TData_1( std::string anId, TIntfLogger &aLogger );
 
     void run();
 
