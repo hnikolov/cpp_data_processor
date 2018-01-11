@@ -52,17 +52,28 @@ public:
     explicit TBaseTest( std::string anId, std::string aDescription = "" );
     virtual ~TBaseTest();
 
-    virtual std::string run_test();
+    virtual void run_test();
 
     void        setDescription( std::string aDescription ) { m_description = aDescription; }
     std::string getDescription()                           { return m_description;         }
+    std::string getId()                                    { return m_id;                  }
 
     template <typename T>
     void setAssertMessage( T anExpected, T aDetected, std::string anId );
 
     std::string getAssertMessage() { return m_assert_msg.str(); }
+    std::string getResultMessage();
+
+    int getRun()  { return m_run;  }
+    int getFail() { return m_fail; }
+
+protected:
+    int m_run;  // Number of tests run
+    int m_fail; // Number of tests fail
 
 private:
+    std::string run_test_1(); // TODO: just an example
+
     std::ostringstream m_assert_msg;
 
     std::string m_id;
@@ -75,7 +86,23 @@ class Test_Func1 : public TBaseTest
 public:
     Test_Func1( std::string anId, std::string aDescription = "" );
 
-    virtual std::string run_test();
+    virtual void run_test();
+
+private:
+    std::string run_test_1();
+};
+
+//-------------------------------------------------------------------------
+class Test_Func2 : public TBaseTest
+{
+public:
+    Test_Func2( std::string anId, std::string aDescription = "" );
+
+    virtual void run_test();
+
+private:
+    std::string run_test_1();
+    std::string run_test_2();
 };
 
 // ===========================================================================================
