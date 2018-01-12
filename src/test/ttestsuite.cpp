@@ -20,22 +20,6 @@ std::string TTestSuite::getResultMessage()
     return result_msg.str();
 }
 
-/*
-void TTestSuite::run_all()
-{
-    m_logger.log( "Executing tests...", m_id );
-    // TODO: Filter tests to be run
-    for( TBaseTest* t : m_tests )
-    {
-        t->execute();
-        m_logger.log( t->getResultMessage(), t->getId() );
-        m_run  += t->getRun();
-        m_fail += t->getFail();
-    }
-    // if (VERBOSE)
-    m_logger.log( getResultMessage(), m_id );
-}
-/*/
 void TTestSuite::run_all()
 {
     m_logger.log( "Executing tests...", m_id );
@@ -51,4 +35,3 @@ void TTestSuite::run_all()
     // if (VERBOSE)
     m_logger.log( getResultMessage(), m_id );
 }
-//*/

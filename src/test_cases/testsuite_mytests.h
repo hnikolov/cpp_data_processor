@@ -8,10 +8,10 @@
 #include "../tlogger_1.h"
 
 //-------------------------------------------------------------------------
-class Test_TData_1_1 : public TBaseTest
+class Test_TData_1 : public TBaseTest
 {
 public:
-    Test_TData_1_1( std::string anId );
+    Test_TData_1( std::string anId );
     virtual void execute();
 
 private:

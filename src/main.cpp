@@ -153,9 +153,6 @@ int main()
     delete myDataProcessor_8;
 
     // TESTS
-    Test_TData_1 myTestData1( "Test_TData_1", myLogger );
-    myTestData1.run();
-
     TTestSuite_myTests myTests1( "myTestSuite", myLogger );
     myTests1.run_all();
 

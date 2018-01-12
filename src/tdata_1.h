@@ -32,7 +32,6 @@ public:
 
     // NOTE: For testing only
     friend class Test_TData_1;
-    friend class Test_TData_1_1;
 
     void defaultInit();
 
@@ -54,40 +53,6 @@ private:
     TConfig_1     m_config;
     TMeasured_1   m_measured;
     TResults_1    m_results;
-
-    std::string   m_id;
-    TIntfLogger & m_logger;
-};
-
-// ============================================
-
-class Test_TData_1
-{
-public:
-    Test_TData_1( std::string anId, TIntfLogger &aLogger );
-
-    void run();
-
-private:
-    TData_1 DUT;
-
-    void assert_double(double aD1, double aD2 );
-    void assert_int( int val_1, int val_2 ); // We can use assert_double instead
-
-    // Tests
-    void test_defaultInit();
-    void test_set_1(); // Configure
-    void test_get_1();
-    void test_set_2();
-    void test_get_2();
-    void test_set_3(); // Runtime
-    void test_get_3();
-    void test_set_4();
-    void test_get_4();
-    void test_set_5(); // Results
-    void test_get_5();
-    void test_set_6();
-    void test_get_6();
 
     std::string   m_id;
     TIntfLogger & m_logger;

@@ -21,11 +21,8 @@ public:
 
     std::string getResultMessage();
 
-/*
-    std::vector< TBaseTest* > m_tests;
-/*/
+protected:
     std::vector< UPtrBaseTest > m_tests;
-//*/
 
 private:
     int m_run;  // Number of tests run
