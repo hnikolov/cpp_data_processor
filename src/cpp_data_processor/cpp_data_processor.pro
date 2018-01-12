@@ -17,7 +17,12 @@ SOURCES += \
     ../tlogger_1.cpp \
     ../tprocessor_1.cpp \
     ../tdata_map.cpp \
-    ../test/ttestsuite.cpp
+    ../test/ttestsuite.cpp \
+    ../test/tbasetest.cpp \
+    ../test_cases/test_tdata_1.cpp \
+    ../test_cases/test_func1.cpp \
+    ../test_cases/test_func2.cpp \
+    ../test_cases/testsuite_mytests.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -41,4 +46,6 @@ HEADERS += \
     ../tlogger_1.h \
     ../tprocessor_1.h \
     ../tdata_map.h \
-    ../test/ttestsuite.h
+    ../test/ttestsuite.h \
+    ../test/tbasetest.h \
+    ../test_cases/testsuite_mytests.h

@@ -5,7 +5,7 @@
 #include "tdataprocessor_1.h"
 #include "tdpimplementation_1.h"
 
-#include "test/ttestsuite.h"
+#include "test_cases/testsuite_mytests.h"
 
 #include <iostream>
 #include <vector>
