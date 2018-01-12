@@ -15,7 +15,7 @@ std::string TTestSuite::getResultMessage()
     result_msg << "Total Run: " << m_run ;
 
     if( m_fail > 0 ) { result_msg << " .. (" << m_fail << "-)"; }
-    else             { result_msg << " .. OK";               }
+    else             { result_msg << " .. OK";                  }
 
     return result_msg.str();
 }
