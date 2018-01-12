@@ -1,7 +1,7 @@
 #include "tdata_1.h"
 #include <iostream>
 
-TData_1::TData_1( std::string anId, TIntfLogger &aLogger ) :
+TData_1::TData_1( std::string anId, ILogger &aLogger ) :
     m_id    ( anId    ),
     m_logger( aLogger )
 {
@@ -26,7 +26,7 @@ void TData_1::defaultInit()
 }
 
 // -------------------
-// Interface TIntfData
+// Interface IData
 // -------------------
 void   TData_1::set_1( const double aValue ) { m_config.d_1 = aValue;   }
 double TData_1::get_1()                      { return m_config.d_1;     }

@@ -3,8 +3,8 @@
 
 TDataProcessor_1::TDataProcessor_1( std::string     anId
                                   , IData          &aData
-                                  , TIntfProcessor &aProcessor
-                                  , TIntfLogger    &aLogger) :
+                                  , IProcessor &aProcessor
+                                  , ILogger    &aLogger) :
     m_id       ( anId       ),
     m_data     ( aData      ),
     m_processor( aProcessor ),
@@ -17,9 +17,9 @@ TDataProcessor_1::~TDataProcessor_1()
     m_logger.log( "Called destuctor", m_id );
 }
 
-// ----------------------------
-// Interface TIntfDataProcessor
-// ----------------------------
+// ------------------------
+// Interface IDataProcessor
+// ------------------------
 void        TDataProcessor_1::set_1( const double aValue )    { m_data.set_1( aValue );    }
 void        TDataProcessor_1::set_4( const int aValue )       { m_data.set_4( aValue );    }
 double      TDataProcessor_1::get_5()                         { return m_data.get_5();     }
@@ -30,8 +30,8 @@ std::string TDataProcessor_1::getId()                         { return m_id;    
 // =========================================================================================
 TDataProcessor_2::TDataProcessor_2( std::string     anId
                                   , IData          *aData
-                                  , TIntfProcessor *aProcessor
-                                  , TIntfLogger    &aLogger) :
+                                  , IProcessor *aProcessor
+                                  , ILogger    &aLogger) :
     m_id       ( anId    ),
     m_logger   ( aLogger )
 {
@@ -46,9 +46,9 @@ TDataProcessor_2::~TDataProcessor_2()
     m_logger.log( "Called destuctor", m_id );
 }
 
-// ----------------------------
-// Interface TIntfDataProcessor
-// ----------------------------
+// ------------------------
+// Interface IDataProcessor
+// ------------------------
 void        TDataProcessor_2::set_1( const double aValue )    { m_data->set_1( aValue );    }
 void        TDataProcessor_2::set_4( const int aValue )       { m_data->set_4( aValue );    }
 double      TDataProcessor_2::get_5()                         { return m_data->get_5();     }
@@ -59,8 +59,8 @@ std::string TDataProcessor_2::getId()                         { return m_id;    
 // =========================================================================================
 TDataProcessor_3::TDataProcessor_3( std::string                     anId
                                   , std::unique_ptr<IData>          aData
-                                  , std::unique_ptr<TIntfProcessor> aProcessor
-                                  , TIntfLogger                    &aLogger) :
+                                  , std::unique_ptr<IProcessor> aProcessor
+                                  , ILogger                    &aLogger) :
     m_id       ( anId       ),
     m_logger   ( aLogger    )
 {
@@ -73,12 +73,13 @@ TDataProcessor_3::~TDataProcessor_3()
     m_logger.log( "Called destuctor", m_id );
 }
 
-// ----------------------------
-// Interface TIntfDataProcessor
-// ----------------------------
+// ------------------------
+// Interface IDataProcessor
+// ------------------------
 void        TDataProcessor_3::set_1( const double aValue )    { m_data->set_1( aValue );    }
 void        TDataProcessor_3::set_4( const int aValue )       { m_data->set_4( aValue );    }
 double      TDataProcessor_3::get_5()                         { return m_data->get_5();     }
 void        TDataProcessor_3::calculate_1()                   { m_processor->calculate_1(); }
 void        TDataProcessor_3::enable_log( const bool enable ) { m_logger.enable( enable );  }
 std::string TDataProcessor_3::getId()                         { return m_id;                }
+// ------------------------

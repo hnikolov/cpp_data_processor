@@ -42,6 +42,6 @@ void TBaseTest::execute()
 // Example of a test. This test fails on purpose.
 std::string TBaseTest::run_test_1()
 {
-    CU_ASSERT_EQ( 1, 0, "Base class test called. Should not happen." );
+    CU_ASSERT_EQ( 1, 0, "Base class test called - should not happen." );
     return ""; // Return an empty string if all asserts OK
 }

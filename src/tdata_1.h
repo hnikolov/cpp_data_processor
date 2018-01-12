@@ -2,7 +2,7 @@
 #define TDATA_1_H
 
 #include "idata.h"
-#include "tintflogger.h"
+#include "ilogger.h"
 
 
 struct TConfig_1
@@ -27,7 +27,7 @@ struct TResults_1
 class TData_1 : public IData
 {
 public:
-    TData_1( std::string anId, TIntfLogger &aLogger );
+    TData_1( std::string anId, ILogger &aLogger );
     virtual ~TData_1();
 
     // NOTE: For testing only
@@ -35,7 +35,7 @@ public:
 
     void defaultInit();
 
-    // Interface TIntfData
+    // Interface IData
     virtual void   set_1( const double aValue ); // Configure
     virtual double get_1()                     ;
     virtual void   set_2( const int    aValue );
@@ -55,7 +55,7 @@ private:
     TResults_1    m_results;
 
     std::string   m_id;
-    TIntfLogger & m_logger;
+    ILogger     & m_logger;
 };
 
 #endif // TDATA_1_H

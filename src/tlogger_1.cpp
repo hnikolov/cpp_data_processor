@@ -43,9 +43,9 @@ const std::string TLogger_1::getMs()
     return std::to_string( ms.count() );
 }
 
-// ---------------------
-// Interface TIntfLogger
-// ---------------------
+// -----------------
+// Interface ILogger
+// -----------------
 void TLogger_1::log( const std::string& msg, const std::string& anId )
 {
     if( m_isEnabled )
@@ -58,3 +58,4 @@ void TLogger_1::enable( const bool enable )
 {
     m_isEnabled = enable;
 }
+// -----------------

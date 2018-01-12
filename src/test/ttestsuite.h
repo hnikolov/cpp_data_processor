@@ -3,7 +3,7 @@
 
 #include "tbasetest.h"
 
-#include "../tintflogger.h"
+#include "../ilogger.h"
 
 #include <iostream>
 #include <sstream>
@@ -15,7 +15,7 @@ typedef std::unique_ptr<TBaseTest> UPtrBaseTest;
 class TTestSuite
 {
 public:
-    TTestSuite( std::string anId, TIntfLogger &aLogger );
+    TTestSuite( std::string anId, ILogger &aLogger );
 
     void run_all();
 
@@ -29,7 +29,7 @@ private:
     int m_fail; // Number of tests failed
 
     std::string   m_id; // TODO: Test description?
-    TIntfLogger & m_logger;
+    ILogger     & m_logger;
 };
 
 #endif // TTESTSUITE_H

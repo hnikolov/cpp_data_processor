@@ -1,6 +1,6 @@
 #include "tdata_map.h"
 
-TData_map::TData_map( std::string anId, TIntfLogger &aLogger ) :
+TData_map::TData_map( std::string anId, ILogger &aLogger ) :
     m_id    ( anId    ),
     m_logger( aLogger )
 {
@@ -58,9 +58,9 @@ double TData_map::_get( std::string anItem )
     return -1; // Not returned due to the assert
 }
 
-// -------------------
-// Interface TIntfData
-// -------------------
+// ---------------
+// Interface IData
+// ---------------
 void   TData_map::set_1( const double aValue ) { _set( "d_1", aValue ); }
 double TData_map::get_1()                      { return  _get( "d_1" ); }
 

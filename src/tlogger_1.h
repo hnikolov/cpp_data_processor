@@ -1,10 +1,10 @@
 #ifndef TLOGGER_1_H
 #define TLOGGER_1_H
 
-#include"tintflogger.h"
+#include"ilogger.h"
 #include <iostream>
 
-class TLogger_1 : public TIntfLogger
+class TLogger_1 : public ILogger
 {
 public:
     TLogger_1();

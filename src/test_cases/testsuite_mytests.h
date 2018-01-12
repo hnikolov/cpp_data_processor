@@ -65,7 +65,7 @@ private:
 class TTestSuite_myTests : public TTestSuite
 {
 public:
-    TTestSuite_myTests( std::string anId, TIntfLogger &aLogger );
+    TTestSuite_myTests( std::string anId, ILogger &aLogger );
 };
 
 #endif // TEST_CASES_H

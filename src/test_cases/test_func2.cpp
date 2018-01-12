@@ -1,6 +1,6 @@
 #include "testsuite_mytests.h"
 
-//---------------------------------------------------------------
+
 Test_Func2::Test_Func2( std::string anId, std::string aDescription ):
     TBaseTest( anId, aDescription )
 {

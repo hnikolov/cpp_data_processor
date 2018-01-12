@@ -1,15 +1,15 @@
 #ifndef TPROCESSOR_H
 #define TPROCESSOR_H
 
-#include "tintfprocessor.h"
-#include "tintflogger.h"
+#include "iprocessor.h"
+#include "ilogger.h"
 #include "idata.h"
 
 
-class TProcessor_1 : public TIntfProcessor
+class TProcessor_1 : public IProcessor
 {
 public:
-    TProcessor_1( std::string anId, IData& aData, TIntfLogger& aLogger );
+    TProcessor_1( std::string anId, IData& aData, ILogger& aLogger );
     virtual ~TProcessor_1();
 
     // Interface TIntfProcessor
@@ -20,7 +20,7 @@ public:
 private:
     std::string   m_id;
     IData       & m_data;
-    TIntfLogger & m_logger;
+    ILogger     & m_logger;
 };
 
 #endif // TPROCESSOR_H

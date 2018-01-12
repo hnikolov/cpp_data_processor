@@ -1,14 +1,14 @@
-#ifndef TINTFDATAPROCESSOR_H
-#define TINTFDATAPROCESSOR_H
+#ifndef IDATAPROCESSOR_H
+#define IDATAPROCESSOR_H
 
 #include <iostream>
 
 // ----------------------
 // Client-side interface
 // ----------------------
-struct TIntfDataProcessor
+struct IDataProcessor
 {
-    virtual ~TIntfDataProcessor() {}
+    virtual ~IDataProcessor() {}
 
     virtual void        set_1( const double aValue )    = 0;
     virtual void        set_4( const int    aValue )    = 0;
@@ -21,4 +21,4 @@ struct TIntfDataProcessor
     virtual std::string getId()                         = 0;
 };
 
-#endif // TINTFDATAPROCESSOR_H
+#endif // IDATAPROCESSOR_H

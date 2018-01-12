@@ -29,7 +29,7 @@ void assert_double( double aD1, double aD2, std::string aMsg = "" )
     }
 }
 
-void simple_use( TIntfDataProcessor & myDataProcessor, double aDouble, int anInt, bool aLogEn = true )
+void simple_use( IDataProcessor & myDataProcessor, double aDouble, int anInt, bool aLogEn = true )
 {
     myDataProcessor.enable_log( aLogEn );
 
@@ -50,7 +50,7 @@ void simple_use( TIntfDataProcessor & myDataProcessor, double aDouble, int anInt
 }
 
 // Factory approach: use pointers
-TDataProcessor_2* create_2( std::string anId, TIntfLogger &aLogger )
+TDataProcessor_2* create_2( std::string anId, ILogger &aLogger )
 {
     std::string sdata = anId + "_data";
     std::string sproc = anId + "_proc";
@@ -60,7 +60,7 @@ TDataProcessor_2* create_2( std::string anId, TIntfLogger &aLogger )
 }
 
 // Factory approach: use smart pointers
-std::unique_ptr<TIntfDataProcessor> create_3( std::string anId, TIntfLogger &aLogger )
+std::unique_ptr<IDataProcessor> create_3( std::string anId, ILogger &aLogger )
 {
     std::string sdata = anId + "_data";
     std::string sproc = anId + "_proc";
@@ -72,7 +72,7 @@ std::unique_ptr<TIntfDataProcessor> create_3( std::string anId, TIntfLogger &aLo
 }
 
 // Using smart pointers and TData_map
-std::unique_ptr<TIntfDataProcessor> create_4( std::string anId, TIntfLogger &aLogger )
+std::unique_ptr<IDataProcessor> create_4( std::string anId, ILogger &aLogger )
 {
     std::string sdata = anId + "_data";
     std::string sproc = anId + "_proc";
@@ -83,8 +83,8 @@ std::unique_ptr<TIntfDataProcessor> create_4( std::string anId, TIntfLogger &aLo
     return myDataProc;
 }
 
-std::vector< TIntfDataProcessor* > myPDPV;
-std::vector< std::unique_ptr<TIntfDataProcessor> > myDPV;
+std::vector< IDataProcessor* > myPDPV;
+std::vector< std::unique_ptr<IDataProcessor> > myDPV;
 
 int main()
 {
@@ -110,9 +110,9 @@ int main()
     TData_1             myData( "Dt4", myLogger );
     TProcessor_1        myProcessor( "Pr4", myData, myLogger );
 
-    TIntfDataProcessor* myDataProcessor_4 = new TDataProcessor_1( "DP4", myData, myProcessor, myLogger );
-    TIntfDataProcessor* myDataProcessor_5 = create_2( "DP5", myLogger );
-    TIntfDataProcessor* myDataProcessor_8 = new TDPImplementation_1( "DP8", myLogger );
+    IDataProcessor* myDataProcessor_4 = new TDataProcessor_1( "DP4", myData, myProcessor, myLogger );
+    IDataProcessor* myDataProcessor_5 = create_2( "DP5", myLogger );
+    IDataProcessor* myDataProcessor_8 = new TDPImplementation_1( "DP8", myLogger );
 
     // DO NOT: myDPV.push_back( create_2( "DP" )); called destructor of pointer, not object -> Memory leak
     myPDPV.push_back(  myDataProcessor_4 ); // TDataProcessor_1
@@ -123,8 +123,8 @@ int main()
     // ----------------------------------------
     // Using smart pointers, delete not needed
     // ----------------------------------------
-    std::unique_ptr<TIntfDataProcessor> myDataProcessor_6 = create_3( "DP6", myLogger );
-    std::unique_ptr<TIntfDataProcessor> myDataProcessor_9 (new TDPImplementation_1( "DP9", myLogger ));
+    std::unique_ptr<IDataProcessor> myDataProcessor_6 = create_3( "DP6", myLogger );
+    std::unique_ptr<IDataProcessor> myDataProcessor_9 (new TDPImplementation_1( "DP9", myLogger ));
 
     myDPV.push_back( move(myDataProcessor_6)      ); // TDataProcessor_3
     myDPV.push_back( move(myDataProcessor_9)      ); // TDPImplementation_1

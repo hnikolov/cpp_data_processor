@@ -2,7 +2,7 @@
 #define TDATA_MAP_H
 
 #include "idata.h"
-#include "tintflogger.h"
+#include "ilogger.h"
 
 //--------------------------------------
 #include <map>
@@ -36,12 +36,12 @@ private:
 class TData_map : public IData
 {
 public:
-    TData_map( std::string anId, TIntfLogger &aLogger );
+    TData_map( std::string anId, ILogger &aLogger );
     virtual ~TData_map();
 
     void defaultInit();
 
-    // Interface TIntfData
+    // Interface IData
     virtual void   set_1( const double aValue ); // Configure
     virtual double get_1()                     ;
     virtual void   set_2( const int    aValue );
@@ -67,7 +67,6 @@ private:
     // Use double to store both doubles and integers
     std::map<std::string, double> m_map;
 
-    // TODO: Need to be public???
     TMAP< double >  m_map_double;
     TMAP< int    >  m_map_int;
 //    TMAP  m_map_double;
@@ -75,7 +74,7 @@ private:
 
 
     std::string   m_id;
-    TIntfLogger & m_logger;
+    ILogger     & m_logger;
 };
 
 #endif // TDATA_MAP_H

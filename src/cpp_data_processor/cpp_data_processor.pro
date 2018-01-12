@@ -39,13 +39,13 @@ HEADERS += \
     ../tdata_1.h \
     ../tdataprocessor_1.h \
     ../tdpimplementation_1.h \
-    ../tintfdataprocessor.h \
-    ../tintflogger.h \
-    ../tintfprocessor.h \
     ../tlogger_1.h \
     ../tprocessor_1.h \
     ../tdata_map.h \
     ../test/ttestsuite.h \
     ../test/tbasetest.h \
     ../test_cases/testsuite_mytests.h \
-    ../idata.h
+    ../idata.h \
+    ../iprocessor.h \
+    ../ilogger.h \
+    ../idataprocessor.h

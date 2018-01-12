@@ -1,7 +1,7 @@
 #include "ttestsuite.h"
 
 
-TTestSuite::TTestSuite(std::string anId, TIntfLogger &aLogger):
+TTestSuite::TTestSuite(std::string anId, ILogger &aLogger):
     m_run   (       0 ),
     m_fail  (       0 ),
     m_id    (    anId ),

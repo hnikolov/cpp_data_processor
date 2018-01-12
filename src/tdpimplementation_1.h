@@ -1,18 +1,18 @@
 #ifndef TDPIMPLEMENTATION_1_H
 #define TDPIMPLEMENTATION_1_H
 
-#include "tintfdataprocessor.h"
-#include "tintflogger.h"
+#include "idataprocessor.h"
+#include "ilogger.h"
 
 #include "tdata_1.h"
 #include "tprocessor_1.h"
 
 
-class TDPImplementation_1 : public TIntfDataProcessor
+class TDPImplementation_1 : public IDataProcessor
 {
 public:
     TDPImplementation_1( std::string   anId
-                       , TIntfLogger & aLogger );
+                       , ILogger     & aLogger );
     virtual ~TDPImplementation_1();
 
     // Interface TIntfDataProcessor
@@ -30,7 +30,7 @@ private:
     std::string    m_id;
     TData_1      * m_data;
     TProcessor_1 * m_processor;
-    TIntfLogger  & m_logger;
+    ILogger      & m_logger;
 };
 
 #endif // TDPIMPLEMENTATION_1_H

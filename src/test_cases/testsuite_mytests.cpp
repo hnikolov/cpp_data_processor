@@ -1,7 +1,7 @@
 #include "testsuite_mytests.h"
 
 
-TTestSuite_myTests::TTestSuite_myTests(std::string anId, TIntfLogger &aLogger):
+TTestSuite_myTests::TTestSuite_myTests(std::string anId, ILogger &aLogger):
     TTestSuite( anId, aLogger )
 {
     m_tests.push_back( UPtrBaseTest(new TBaseTest   ("myFirst"))); // Should not call base class test
