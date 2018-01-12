@@ -3,7 +3,7 @@
 
 #include "tintfprocessor.h"
 #include "tintflogger.h"
-#include "tintfdata.h"
+#include "idata.h"
 
 
 class TProcessor_1 : public TIntfProcessor

@@ -39,7 +39,6 @@ HEADERS += \
     ../tdata_1.h \
     ../tdataprocessor_1.h \
     ../tdpimplementation_1.h \
-    ../tintfdata.h \
     ../tintfdataprocessor.h \
     ../tintflogger.h \
     ../tintfprocessor.h \
@@ -48,4 +47,5 @@ HEADERS += \
     ../tdata_map.h \
     ../test/ttestsuite.h \
     ../test/tbasetest.h \
-    ../test_cases/testsuite_mytests.h
+    ../test_cases/testsuite_mytests.h \
+    ../idata.h

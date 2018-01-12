@@ -1,7 +1,7 @@
 #ifndef TDATA_1_H
 #define TDATA_1_H
 
-#include "tintfdata.h"
+#include "idata.h"
 #include "tintflogger.h"
 
 

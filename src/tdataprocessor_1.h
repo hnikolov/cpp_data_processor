@@ -1,7 +1,7 @@
 #ifndef TDATAPROCESSOR_1_H
 #define TDATAPROCESSOR_1_H
 
-#include "tintfdata.h"
+#include "idata.h"
 #include "tintfprocessor.h"
 #include "tintflogger.h"
 #include "tintfdataprocessor.h"
