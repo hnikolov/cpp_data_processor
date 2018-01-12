@@ -2,7 +2,7 @@
 
 
 TDataProcessor_1::TDataProcessor_1( std::string     anId
-                                  , TIntfData      &aData
+                                  , IData          &aData
                                   , TIntfProcessor &aProcessor
                                   , TIntfLogger    &aLogger) :
     m_id       ( anId       ),
@@ -29,7 +29,7 @@ std::string TDataProcessor_1::getId()                         { return m_id;    
 
 // =========================================================================================
 TDataProcessor_2::TDataProcessor_2( std::string     anId
-                                  , TIntfData      *aData
+                                  , IData          *aData
                                   , TIntfProcessor *aProcessor
                                   , TIntfLogger    &aLogger) :
     m_id       ( anId    ),
@@ -58,7 +58,7 @@ std::string TDataProcessor_2::getId()                         { return m_id;    
 
 // =========================================================================================
 TDataProcessor_3::TDataProcessor_3( std::string                     anId
-                                  , std::unique_ptr<TIntfData>      aData
+                                  , std::unique_ptr<IData>          aData
                                   , std::unique_ptr<TIntfProcessor> aProcessor
                                   , TIntfLogger                    &aLogger) :
     m_id       ( anId       ),

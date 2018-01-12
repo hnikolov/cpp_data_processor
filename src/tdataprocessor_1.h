@@ -14,7 +14,7 @@ class TDataProcessor_1 : public TIntfDataProcessor
 {
 public:
     TDataProcessor_1( std::string      anId
-                    , TIntfData      & aData
+                    , IData      & aData
                     , TIntfProcessor & aProcessor
                     , TIntfLogger    & aLogger );
     virtual ~TDataProcessor_1();
@@ -29,7 +29,7 @@ public:
 
 private:
     std::string      m_id;
-    TIntfData      & m_data;
+    IData      & m_data;
     TIntfProcessor & m_processor;
     TIntfLogger    & m_logger;
 };
@@ -45,7 +45,7 @@ class TDataProcessor_2 : public TIntfDataProcessor
 {
 public:
     TDataProcessor_2( std::string      anId
-                    , TIntfData      * aData
+                    , IData          * aData
                     , TIntfProcessor * aProcessor
                     , TIntfLogger    & aLogger );
     virtual ~TDataProcessor_2();
@@ -60,7 +60,7 @@ public:
 
 private:
     std::string      m_id;
-    TIntfData      * m_data;
+    IData          * m_data;
     TIntfProcessor * m_processor;
     TIntfLogger    & m_logger;
 };
@@ -73,7 +73,7 @@ class TDataProcessor_3 : public TIntfDataProcessor
 {
 public:
     TDataProcessor_3( std::string                     anId
-                    , std::unique_ptr<TIntfData>      aData
+                    , std::unique_ptr<IData>          aData
                     , std::unique_ptr<TIntfProcessor> aProcessor
                     , TIntfLogger                   & aLogger );
     virtual ~TDataProcessor_3();
@@ -88,7 +88,7 @@ public:
 
 private:
     std::string                       m_id;
-    std::unique_ptr< TIntfData      > m_data;
+    std::unique_ptr< IData          > m_data;
     std::unique_ptr< TIntfProcessor > m_processor;
     TIntfLogger                     & m_logger;
 };

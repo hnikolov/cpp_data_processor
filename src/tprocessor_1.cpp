@@ -1,6 +1,6 @@
 #include "tprocessor_1.h"
 
-TProcessor_1::TProcessor_1( std::string anId, TIntfData& aData, TIntfLogger& aLogger ) :
+TProcessor_1::TProcessor_1( std::string anId, IData& aData, TIntfLogger& aLogger ) :
     m_id    ( anId    ),
     m_data  ( aData   ),
     m_logger( aLogger )

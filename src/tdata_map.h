@@ -33,7 +33,7 @@ private:
 //*/
 
 // --------------------------------------
-class TData_map : public TIntfData
+class TData_map : public IData
 {
 public:
     TData_map( std::string anId, TIntfLogger &aLogger );

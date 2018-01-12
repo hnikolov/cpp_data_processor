@@ -1,9 +1,9 @@
-#ifndef TINTFDATA_H
-#define TINTFDATA_H
+#ifndef IDATA_H
+#define IDATA_H
 
-struct TIntfData
+struct IData
 {
-    virtual ~TIntfData() {}
+    virtual ~IData() {}
 
     virtual void   set_1( const double aValue ) = 0; // Configure
     virtual double get_1()                      = 0;
@@ -19,4 +19,4 @@ struct TIntfData
     virtual int    get_6()                      = 0;
 };
 
-#endif // TINTFDATA_H
+#endif // IDATA_H

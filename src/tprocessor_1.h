@@ -9,7 +9,7 @@
 class TProcessor_1 : public TIntfProcessor
 {
 public:
-    TProcessor_1( std::string anId, TIntfData& aData, TIntfLogger& aLogger );
+    TProcessor_1( std::string anId, IData& aData, TIntfLogger& aLogger );
     virtual ~TProcessor_1();
 
     // Interface TIntfProcessor
@@ -19,7 +19,7 @@ public:
 
 private:
     std::string   m_id;
-    TIntfData   & m_data;
+    IData       & m_data;
     TIntfLogger & m_logger;
 };
 

@@ -24,7 +24,7 @@ struct TResults_1
 };
 
 // --------------------------------------
-class TData_1 : public TIntfData
+class TData_1 : public IData
 {
 public:
     TData_1( std::string anId, TIntfLogger &aLogger );
