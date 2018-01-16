@@ -1,15 +1,15 @@
 #include "testsuite_mytests.h"
 
 
-Test_Func1::Test_Func1( std::string anId, std::string aDescription ):
-    TBaseTest( anId, aDescription )
+Test_Func1::Test_Func1( std::string anId ):
+    TBaseTest( anId )
 {
 }
 
 void Test_Func1::execute()
 {
     CU_RUN( run_test_1 );
-    CU_RUN( run_test_2 ); // Just as an example...
+    CU_RUN( run_test_2 );
     CU_RUN( run_test_3 );
     CU_RUN( run_test_4 );
 }

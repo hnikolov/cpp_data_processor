@@ -9,6 +9,11 @@ TTestSuite::TTestSuite(std::string anId, ILogger &aLogger):
 {
 }
 
+void TTestSuite::add( TBaseTest* aTest )
+{
+    m_tests.push_back( UPtrBaseTest( aTest ));
+}
+
 std::string TTestSuite::getResultMessage()
 {
     std::ostringstream result_msg;

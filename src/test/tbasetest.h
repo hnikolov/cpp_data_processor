@@ -4,15 +4,16 @@
 #include <iostream>
 #include <sstream>
 
-// Not used
-#define SET_SUB_TEST_NAME() (m_SubTestId = __FUNCTION__)
+// TESTS MACROS ------------------------------------------------
+// Get the function name in which an assert is checked
+// -------------------------------------------------------------
+#define SET_SUB_TEST_NAME() ( m_SubTestId = __FUNCTION__ )
 
-// MACROS ------------------------------------------------------
-// NOTE: Only 1 assert fails per test because we return
+// NOTE: Only 1 assert fails per test because it calls return
 // -------------------------------------------------------------
 #define CU_ASSERT_EQ( anExpected, aDetected, aCndName ) do     \
 {                                                              \
-    m_SubTestId = __FUNCTION__;                                \
+    SET_SUB_TEST_NAME();                                       \
                                                                \
     std::string s1       = std::to_string( anExpected );       \
     std::string s2       = std::to_string(  aDetected );       \
@@ -27,6 +28,7 @@
 
 // Called by execute()
 // TODO: Init()/Deinit() before/after each function()?
+// -------------------------------------------------------------
 #define CU_RUN( function ) do                                  \
 {                                                              \
     std::string message = function();                          \
@@ -45,7 +47,7 @@
 class TBaseTest
 {
 public:
-    explicit TBaseTest( std::string anId, std::string aDescription = "" );
+    explicit TBaseTest( std::string anId );
     ~TBaseTest();
 
     virtual void execute();
@@ -57,21 +59,15 @@ public:
     std::string getAssertMessage( std::string anExpected, std::string aDetected, std::string anId );
     std::string getResultMessage();
 
-    // TODO: How useful is this?
-    void        setDescription( std::string aDescription ) { m_description = aDescription; }
-    std::string getDescription()                           { return m_description;         }
-
 protected:
-    int m_run;  // Number of tests run
-    int m_fail; // Number of tests failed
+    int m_run;                // Number of tests run
+    int m_fail;               // Number of tests failed
 
-    std::string m_id;        // Test name. A test may run one or more test functions
-    std::string m_SubTestId; // Set to the current test/function name running a test
+    std::string m_id;         // Test name. A test may run one or more test functions
+    std::string m_SubTestId;  // Set to the current test/function name running a test
 
 private:
-    std::string run_test_1();  // This test fails on purpose - base class test should not be called
-
-    std::string m_description; // TODO
+    std::string run_test_1(); // This test fails on purpose - base class test should not be called
 };
 
 #endif // TBASETEST_H

@@ -39,7 +39,7 @@ private:
 class Test_Func1 : public TBaseTest
 {
 public:
-    Test_Func1( std::string anId, std::string aDescription = "" );
+    Test_Func1( std::string anId );
     virtual void execute();
 
 private:
@@ -53,7 +53,7 @@ private:
 class Test_Func2 : public TBaseTest
 {
 public:
-    Test_Func2( std::string anId, std::string aDescription = "" );
+    Test_Func2( std::string anId );
     virtual void execute();
 
 private:

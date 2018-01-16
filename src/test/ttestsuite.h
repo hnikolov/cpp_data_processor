@@ -19,6 +19,8 @@ public:
 
     void run_all();
 
+    void add( TBaseTest* aTest );
+
     std::string getResultMessage();
 
 protected:
@@ -28,7 +30,7 @@ private:
     int m_run;  // Number of tests run
     int m_fail; // Number of tests failed
 
-    std::string   m_id; // TODO: Test description?
+    std::string   m_id;
     ILogger     & m_logger;
 };
 
