@@ -14,9 +14,9 @@ TBaseTest::~TBaseTest() { std::cout << "[" << m_id << "] " << "Destructor called
 std::string TBaseTest::getAssertMessage( std::string anExpected, std::string aDetected, std::string anId )
 {
     std::ostringstream assert_msg;
-    assert_msg << m_id << ", "  << anId       << ", wrong value"
-               << ", expected " << anExpected
-               << ", detected " << aDetected
+    assert_msg << m_SubTestId << "(), " << anId       << ", wrong value"
+               << ", expected "         << anExpected
+               << ", detected "         << aDetected
                << std::endl;
 
     return assert_msg.str();
