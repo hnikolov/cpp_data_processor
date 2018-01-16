@@ -5,7 +5,7 @@
 #include <sstream>
 
 // Not used
-#define SET_SUB_TEST_NAME() (chr_pSubTestName = __FUNCTION__)
+#define SET_SUB_TEST_NAME() (m_SubTestId = __FUNCTION__)
 
 // MACROS ------------------------------------------------------
 // NOTE: Only 1 assert fails per test because we return
