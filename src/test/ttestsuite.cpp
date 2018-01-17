@@ -2,41 +2,30 @@
 
 
 TTestSuite::TTestSuite(std::string anId, ILogger &aLogger):
-    m_run   (       0 ),
-    m_fail  (       0 ),
-    m_id    (    anId ),
+    BTest   (    anId ),
     m_logger( aLogger )
 {
 }
 
-void TTestSuite::add( TBaseTest* aTest )
+void TTestSuite::add( TTest* aTest )
 {
     m_tests.push_back( UPtrBaseTest( aTest ));
 }
 
-std::string TTestSuite::getResultMessage()
+void TTestSuite::execute()
 {
-    std::ostringstream result_msg;
-    result_msg << "Total Run: " << m_run ;
-
-    if( m_fail > 0 ) { result_msg << " .. (" << m_fail << "-)"; }
-    else             { result_msg << " .. OK";                  }
-
-    return result_msg.str();
-}
-
-void TTestSuite::run_all()
-{
-    m_logger.log( "Executing tests...", m_id );
+    m_logger.log( "Executing tests...", getId() );
+    m_logger.log( "------------------", getId() );
     // TODO: Filter tests to be run
 
     for( auto&& t : m_tests )
     {
         t->execute();
         m_logger.log( t->getResultMessage(), t->getId() );
-        m_run  += t->getRun();
-        m_fail += t->getFail();
+        incRun ( t->getRun()  );
+        incFail( t->getFail() );
     }
     // if (VERBOSE)
-    m_logger.log( getResultMessage(), m_id );
+    m_logger.log( "------------------", getId() );
+    m_logger.log( getResultMessage(),   getId() );
 }

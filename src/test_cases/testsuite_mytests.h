@@ -1,14 +1,14 @@
 #ifndef TEST_CASES_H
 #define TEST_CASES_H
 
-#include "../test/tbasetest.h"
+#include "../test/ttest.h"
 #include "../test/ttestsuite.h"
 
 #include "../tdata_1.h"
 #include "../tlogger_1.h"
 
 //-------------------------------------------------------------------------
-class Test_TData_1 : public TBaseTest
+class Test_TData_1 : public TTest
 {
 public:
     Test_TData_1( std::string anId );
@@ -36,7 +36,7 @@ private:
 };
 
 //-------------------------------------------------------------------------
-class Test_Func1 : public TBaseTest
+class Test_Func1 : public TTest
 {
 public:
     Test_Func1( std::string anId );
@@ -50,7 +50,7 @@ private:
 };
 
 //-------------------------------------------------------------------------
-class Test_Func2 : public TBaseTest
+class Test_Func2 : public TTest
 {
 public:
     Test_Func2( std::string anId );

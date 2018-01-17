@@ -1,37 +1,31 @@
 #ifndef TTESTSUITE_H
 #define TTESTSUITE_H
 
-#include "tbasetest.h"
+#include "btest.h"
+#include "ttest.h"
 
 #include "../ilogger.h"
 
 #include <iostream>
-#include <sstream>
 #include <vector>
 #include <memory>
 
-typedef std::unique_ptr<TBaseTest> UPtrBaseTest;
+typedef std::unique_ptr< TTest > UPtrBaseTest;
 
-class TTestSuite
+
+class TTestSuite : public BTest
 {
 public:
     TTestSuite( std::string anId, ILogger &aLogger );
 
-    void run_all();
+    virtual void execute();
 
-    void add( TBaseTest* aTest );
-
-    std::string getResultMessage();
-
-protected:
-    std::vector< UPtrBaseTest > m_tests;
+    void add( TTest *aTest );
 
 private:
-    int m_run;  // Number of tests run
-    int m_fail; // Number of tests failed
+    std::vector< UPtrBaseTest > m_tests;
 
-    std::string   m_id;
-    ILogger     & m_logger;
+    ILogger & m_logger;
 };
 
 #endif // TTESTSUITE_H

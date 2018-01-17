@@ -1,19 +1,22 @@
-#ifndef TBASETEST_H
-#define TBASETEST_H
+#ifndef CU_MACROS_H
+#define CU_MACROS_H
 
-#include <iostream>
-#include <sstream>
-
-// TESTS MACROS ------------------------------------------------
-// Get the function name in which an assert is checked
+// TESTS MACROS
 // -------------------------------------------------------------
-#define SET_SUB_TEST_NAME() ( m_SubTestId = __FUNCTION__ )
+// The class using these macros need to provide:
+//   void   incRun()         - Increment number of tests run
+//   void   incFail()        - Increment number of tests fail
+//   int    getRun()         - Number of tests run
+//   string getId()          - Test name
+//   void   setSubTestName() - Set function name in which an assert is checked
+//   string getAssertMessage(s_exp, s_det, s_cndName)
+// -------------------------------------------------------------
 
 // NOTE: Only 1 assert fails per test because it calls return
 // -------------------------------------------------------------
 #define CU_ASSERT_EQ( anExpected, aDetected, aCndName ) do     \
 {                                                              \
-    SET_SUB_TEST_NAME();                                       \
+    setSubTestName( __FUNCTION__ );                            \
                                                                \
     std::string s1       = std::to_string( anExpected );       \
     std::string s2       = std::to_string(  aDetected );       \
@@ -32,42 +35,15 @@
 #define CU_RUN( function ) do                                  \
 {                                                              \
     std::string message = function();                          \
-    m_run++;                                                   \
+    incRun();                                                   \
     if( message != "" )                                        \
     {                                                          \
-        m_fail++;                                              \
-        std::cout << "[Error]: Test " << m_run                 \
-                  <<           " of " << m_id    << std::endl  \
+        incFail();                                              \
+        std::cout << "[Error]: Test " << getRun()              \
+                  <<           " of " << getId() << std::endl  \
                   << "         "      << message << std::endl; \
     }                                                          \
 }   while (0)
 // -------------------------------------------------------------
 
-
-class TBaseTest
-{
-public:
-    explicit TBaseTest( std::string anId );
-    ~TBaseTest();
-
-    virtual void execute();
-
-    std::string getId()   { return m_id;   }
-    int         getRun()  { return m_run;  }
-    int         getFail() { return m_fail; }
-
-    std::string getAssertMessage( std::string anExpected, std::string aDetected, std::string anId );
-    std::string getResultMessage();
-
-protected:
-    int m_run;                // Number of tests run
-    int m_fail;               // Number of tests failed
-
-    std::string m_id;         // Test name. A test may run one or more test functions
-    std::string m_SubTestId;  // Set to the current test/function name running a test
-
-private:
-    std::string run_test_1(); // This test fails on purpose - base class test should not be called
-};
-
-#endif // TBASETEST_H
+#endif // CU_MACROS_H
