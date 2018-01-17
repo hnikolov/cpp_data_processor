@@ -9,12 +9,11 @@ BTest::BTest( std::string anId ) :
 
 BTest::~BTest()  { std::cout << "[" << m_id << "] " << "Destructor called" << std::endl; }
 
-std::string BTest::getId  ()                  { return m_id;     }
-int         BTest::getRun ()                  { return m_run;    }
-int         BTest::getFail()                  { return m_fail;   }
-void        BTest::incRun ( const int anInc ) { m_run  += anInc; }
-void        BTest::incFail( const int anInc ) { m_fail += anInc; }
-
+std::string BTest::getId         ()                    { return m_id;         }
+int         BTest::getRun        ()                    { return m_run;        }
+int         BTest::getFail       ()                    { return m_fail;       }
+void        BTest::incRun        ( const int   anInc ) { m_run  += anInc;     }
+void        BTest::incFail       ( const int   anInc ) { m_fail += anInc;     }
 void        BTest::setSubTestName( std::string aName ) { m_SubTestId = aName; }
 
 std::string BTest::getResultMessage()
