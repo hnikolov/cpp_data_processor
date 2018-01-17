@@ -2,7 +2,6 @@
 #define TTESTSUITE_H
 
 #include "btest.h"
-#include "ttest.h"
 
 #include "../ilogger.h"
 
@@ -10,7 +9,7 @@
 #include <vector>
 #include <memory>
 
-typedef std::unique_ptr< TTest > UPtrBaseTest;
+typedef std::unique_ptr< BTest > UPtrBaseTest;
 
 
 class TTestSuite : public BTest
@@ -20,7 +19,7 @@ public:
 
     virtual void execute();
 
-    void add( TTest *aTest );
+    void add( BTest *aTest );
 
 private:
     std::vector< UPtrBaseTest > m_tests;

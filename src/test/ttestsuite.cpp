@@ -7,7 +7,7 @@ TTestSuite::TTestSuite(std::string anId, ILogger &aLogger):
 {
 }
 
-void TTestSuite::add( TTest* aTest )
+void TTestSuite::add( BTest* aTest )
 {
     m_tests.push_back( UPtrBaseTest( aTest ));
 }

@@ -2,7 +2,7 @@
 
 
 Test_Func1::Test_Func1( std::string anId ):
-    TTest( anId )
+    BTest( anId )
 {
 }
 

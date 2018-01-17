@@ -1,7 +1,7 @@
 #include "testsuite_mytests.h"
 
 Test_TData_1::Test_TData_1( std::string anId ) :
-    TTest( anId ),
+    BTest( anId ),
     DUT      ( TData_1("DUT_TData_1_1", m_logger) )
 {
 }
