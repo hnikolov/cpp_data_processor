@@ -68,4 +68,10 @@ public:
     TTestSuite_myTests( std::string anId, ILogger &aLogger );
 };
 
+class TTestSuite_subTests : public TTestSuite
+{
+public:
+    TTestSuite_subTests( std::string anId, ILogger &aLogger );
+};
+
 #endif // TEST_CASES_H

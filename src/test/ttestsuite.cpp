@@ -14,7 +14,6 @@ void TTestSuite::add( BTest* aTest )
 
 void TTestSuite::execute()
 {
-    m_logger.log( "Executing tests...", getId() );
     m_logger.log( "------------------", getId() );
     // TODO: Filter tests to be run
 
