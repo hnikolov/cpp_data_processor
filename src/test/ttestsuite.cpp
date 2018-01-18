@@ -15,6 +15,7 @@ void TTestSuite::add( BTest* aTest )
 void TTestSuite::execute()
 {
     m_logger.log( "------------------", getId() );
+    // m_logger.enable( false );
     // TODO: Filter tests to be run
 
     for( auto&& t : m_tests )
@@ -25,6 +26,7 @@ void TTestSuite::execute()
         incFail( t->getFail() );
     }
     // if (VERBOSE)
+    m_logger.enable( true );
     m_logger.log( "------------------", getId() );
     m_logger.log( getResultMessage(),   getId() );
 }
