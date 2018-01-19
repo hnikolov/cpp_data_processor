@@ -20,6 +20,7 @@ public:
     virtual void execute();
 
     void add( BTest *aTest );
+    void logResults();
 
 private:
     std::vector< UPtrBaseTest > m_tests;

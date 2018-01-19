@@ -155,6 +155,7 @@ int main()
     // TESTS
     TTestSuite_myTests myTests1( "myTestSuite", myLogger );
     myTests1.execute();
+    myTests1.logResults();
 
     return 0;
 }

@@ -28,5 +28,9 @@ void TTestSuite::execute()
     // if (VERBOSE)
     m_logger.enable( true );
     m_logger.log( "------------------", getId() );
-    m_logger.log( getResultMessage(),   getId() );
+}
+
+void TTestSuite::logResults()
+{
+    m_logger.log( getResultMessage(), getId() );
 }
