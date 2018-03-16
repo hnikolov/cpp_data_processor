@@ -39,10 +39,10 @@
     if( assert_message != "" )                                         \
     {                                                                  \
         incFail();                                                     \
-        std::cout << "[Error]: Test " << getRun() << " of "            \
-                                      << getId() << std::endl          \
-                  << "         "      << getAssertInfo() << std::endl  \
-                  << "         "      << assert_message  << std::endl; \
+        std::cout << "\n[Error]: Test " << getRun() << " of "          \
+                                        << getId()  << std::endl       \
+                  << "         "        << getAssertInfo() << std::endl\
+                  << "         "        << assert_message;             \
     }                                                                  \
 }   while (0)
 // ---------------------------------------------------------------------
